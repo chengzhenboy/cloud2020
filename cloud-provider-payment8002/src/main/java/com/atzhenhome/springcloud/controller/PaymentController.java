@@ -20,6 +20,7 @@ public class PaymentController
 {
     @Resource
     private PaymentService paymentService;
+
     @Value("${server.port}")
     private String serverPort;
     
@@ -46,7 +47,7 @@ public class PaymentController
         log.info("*****插入结果：" + payment);
         if (payment != null)
         {
-            return new CommonResult(200, "查询成功，serverPort:"+serverPort, payment);
+            return new CommonResult(200, "查询成功，serverPort:"+serverPort+ payment);
         }
         else
         {
