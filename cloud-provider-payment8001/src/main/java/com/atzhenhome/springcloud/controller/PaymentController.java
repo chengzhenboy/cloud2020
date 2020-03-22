@@ -23,9 +23,10 @@ public class PaymentController
 {
     @Resource
     private PaymentService paymentService;
+    
     @Resource
     private DiscoveryClient discoveryClient;
-
+    
     @Value("${server.port}")
     private String serverPort;
     
@@ -37,7 +38,7 @@ public class PaymentController
         log.info("*****插入结果：" + result);
         if (result > 0)
         {
-            return new CommonResult(200, "插入数据成功，serverPort"+serverPort, result);
+            return new CommonResult(200, "插入数据成功，serverPort" + serverPort, result);
         }
         else
         {
@@ -52,25 +53,28 @@ public class PaymentController
         log.info("*****插入结果：" + payment);
         if (payment != null)
         {
-            return new CommonResult(200, "查询成功，serverPort:"+serverPort, payment);
+            return new CommonResult(200, "查询成功，serverPort:" + serverPort, payment);
         }
         else
         {
             return new CommonResult(444, "没有对应记录,查询ID：" + id, null);
         }
     }
+    
     @GetMapping("/payment/discovery")
-    public Object discovery(){
-        //实例，微服务名称
+    public Object discovery()
+    {
+        // 实例，微服务名称
         List<String> services = discoveryClient.getServices();
-        for (String string:services
-             ) {
-            log.info(string);
+        for (String string : services)
+        {
+            log.info("services:" + string);
         }
         List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PROVIDER-SERVICE");
-        for (ServiceInstance instance:instances
-             ) {
-            log.info(instance.getServiceId()+"\t"+instance.getHost()+"\t"+instance.getPort());
+        for (ServiceInstance instance : instances)
+        {
+            log.info("instance:" + instance.getServiceId() + "\t" + instance.getHost() + "\t" + instance.getPort()
+                + "\t" + instance.getUri());
         }
         return this.discoveryClient;
     }
