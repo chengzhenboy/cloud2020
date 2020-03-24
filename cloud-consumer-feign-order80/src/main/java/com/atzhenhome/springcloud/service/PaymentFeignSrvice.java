@@ -3,6 +3,7 @@ package com.atzhenhome.springcloud.service;
 import com.atzhenhome.springcloud.entities.CommonResult;
 import com.atzhenhome.springcloud.entities.Payment;
 import feign.Param;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;

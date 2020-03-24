@@ -24,6 +24,7 @@ public class OrderFeignController
     @GetMapping("/consumer/payment/get1/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id)
     {
+        log.info("我要看到日志信息");
         return paymentFeignSrvice.getPaymentById(id);
     }
     
