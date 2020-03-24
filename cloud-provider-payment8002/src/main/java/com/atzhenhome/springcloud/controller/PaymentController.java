@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author:Chengzhen
@@ -53,5 +54,28 @@ public class PaymentController
         {
             return new CommonResult(444, "没有对应记录,查询ID：" + id, null);
         }
+    }
+
+    /***
+     * 暂停三秒钟
+     *
+     * @return java.lang.String
+     * @param
+     * @methodName paymentFeignTimeout
+     * @author ChengZhen
+     * @date 2020/3/24
+     */
+    @GetMapping("/payment/feign/timeout")
+    public String paymentFeignTimeout()
+    {
+        try
+        {
+            TimeUnit.SECONDS.sleep(3);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return serverPort;
     }
 }
